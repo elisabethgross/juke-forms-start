@@ -1,6 +1,11 @@
 
 <div>
   <h3>{{ playlist.name }}</h3>
+  <div>
+    <label for="songSelect">Songs  </label>
+    <select name="songSelect" ng-model="selectedSong" ng-options="song as song.name for song in songs"></select>
+    <button ng-click="submit()" class="btn btn-success">Add Song</button>
+  </div>
   <table class='table' ng-show="playlist.songs.length">
     <thead>
       <tr>

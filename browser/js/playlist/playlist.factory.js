@@ -27,6 +27,13 @@ juke.factory('PlaylistFactory', function ($http) {
     .then(function (response) { return response.data; });
   };
 
+  PlaylistFactory.addSong = function (playlist, song) {
+    return $http.post('/api/playlists/' + playlist.id + '/songs', song)
+    .then(function (response) {
+      return response.data;
+    });
+  };
+
   return PlaylistFactory;
 
 });
