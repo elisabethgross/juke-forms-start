@@ -29,11 +29,13 @@ juke.controller('SinglePlaylistCtrl', function($scope, thePlaylist, SongFactory,
 
   $scope.playlist = thePlaylist;
 
+  $scope.playlist.songs = $scope.playlist.songs.map(function (song) {
+    return SongFactory.convert(song);
+  });
+
   $scope.submit = function () {
-    PlaylistFactory.addSong($scope.playlist, $scope.selectedSong)
-    .then(function (song) {
-      $scope.playlist.songs.push(SongFactory.convert(song));
-    });
+    $scope.playlist.songs.push(SongFactory.convert($scope.selectedSong));
+    PlaylistFactory.addSong($scope.playlist, $scope.selectedSong);
   };
 
   $scope.toggle = function (song) {
