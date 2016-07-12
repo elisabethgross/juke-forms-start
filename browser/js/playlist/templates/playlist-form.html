@@ -1,17 +1,18 @@
 <div class="well">
-  <form name="newPlaylist" ng-submit='submit()' class="form-horizontal">
+  <form name="newPlaylistForm" ng-submit='submit()' class="form-horizontal" novalidate>
     <fieldset>
       <legend>New Playlist</legend>
       <div class="form-group">
         <label class="col-xs-2 control-label">Name</label>
         <div class="col-xs-10">
-          <input ng-model="newPlaylist.name" ng-required="true" ng-minlength="1" ng-maxlength="16" ng-disabled="newPlaylist.$invalid && newPlaylist.$dirty" class="form-control" type="text">
-          <div ng-show="newPlaylist.$invalid && newPlaylist.$dirty" class="alert alert-warning">Please enter a name</div>
+          <input name="inputName" ng-model="newPlaylist.name" ng-required="true" ng-maxlength="16" class="form-control" type="text">
+          <div ng-show="newPlaylistForm.inputName.$error.required && newPlaylistForm.inputName.$dirty" class="alert alert-warning">Title is required</div>
+          <div ng-show="newPlaylistForm.inputName.$error.maxlength" class="alert alert-warning">Title cannot be longer than 16 characters</div>
         </div>
       </div>
       <div class="form-group">
         <div class="col-xs-10 col-xs-offset-2">
-          <button class="btn btn-success" ng-click="goToPlaylist(newPlaylist)">Create Playlist</button>
+          <button ng-disabled="newPlaylistForm.$invalid && newPlaylistForm.$dirty" class="btn btn-success" ng-click="goToPlaylist(newPlaylist)">Create Playlist</button>
         </div>
       </div>
     </fieldset>

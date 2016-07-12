@@ -1,6 +1,9 @@
 <div>
   <h3>Artists</h3>
-  <input type="text" ng-model="artistSearch">
+  <div class="panel input-group">
+    <span class="input-group-addon">Filter</span>
+    <input class="form-control" type="text" ng-model="artistSearch" placeholder="by name">
+  </div>
   <hr></hr>
   <div class="list-group">
     <div class="list-group-item" ng-repeat="artist in artists | filter: {name: artistSearch}">
