@@ -20,7 +20,7 @@ juke.controller('PlaylistListCtrl', function ($scope, PlaylistFactory) {
   });
 });
 
-juke.controller('SinglePlaylistCtrl', function($scope, thePlaylist, SongFactory, PlaylistFactory){
+juke.controller('SinglePlaylistCtrl', function($scope, thePlaylist, SongFactory, PlaylistFactory, PlayerFactory){
 
   SongFactory.getAllSongs()
   .then(function (songs) {
@@ -34,6 +34,16 @@ juke.controller('SinglePlaylistCtrl', function($scope, thePlaylist, SongFactory,
     .then(function (song) {
       $scope.playlist.songs.push(SongFactory.convert(song));
     });
+  };
+
+  $scope.toggle = function (song) {
+    if (song !== PlayerFactory.getCurrentSong()) {
+      PlayerFactory.start(song, $scope.playlist.songs);
+    } else if ( PlayerFactory.isPlaying() ) {
+      PlayerFactory.pause();
+    } else {
+      PlayerFactory.resume();
+    }
   };
 
 });
